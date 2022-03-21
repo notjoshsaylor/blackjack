@@ -1,0 +1,29 @@
+body{
+    margin: 0;
+    font-family: lobster;
+    font-weight: bold;
+    font-size: 25px;
+    color: goldenrod;
+    text-align: center;
+    background-image: url(img/chips.jpg);
+    background-size: cover;
+    background-color: black;
+}
+
+button{
+    width: 100px;
+    height: auto;
+    padding: 5px;
+    background-color: goldenrod;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+
+}
+#message-ele{
+    font-style: italic;
+}
+p{
+    color: white;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
