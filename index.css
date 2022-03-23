@@ -5,8 +5,8 @@ body{
     font-size: 25px;
     color: goldenrod;
     text-align: center;
-    background-image: url(img/chips.jpg);
     background-size: cover;
+    background-image: url("img/chips.jpg");
     background-color: black;
 }
 
@@ -26,4 +26,26 @@ button{
 p{
     color: white;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.dealer{
+    border: 3px goldenrod solid;
+    border-radius: 4px;
+    width: 300px;
+    margin: 2.5px;
+
+}
+
+.player{
+    border: 3px goldenrod solid;
+    border-radius: 4px;
+    width: 300px;
+    margin: 2.5px;
+    background: black;
 }

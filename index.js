@@ -20,6 +20,8 @@ let playerEle = document.getElementById("player");
 let dCardsEle = document.getElementById("dcards-ele");
 let dSumEle = document.getElementById("dSum-ele");
 let dMessageEle = document.getElementById("dMessage-ele");
+let stayEle = document.getElementById("stay-ele");
+let startEle = document.getElementById("start-ele");
 
 playerEle.textContent = player.name + " - " + "$" + player.chips;
 
@@ -37,17 +39,6 @@ function startGame(){
     dCards = [card3, card4];
     dSum = card3 + card4;
     renderGame()
-};
-
-function randomCard() {
-    let random = Math.floor(Math.random() * 13) +1
-        if (random > 10){
-            return 10
-        }else if (random === 1 ){
-            return 11
-        }else {
-            return random
-        };
 };
 
 function renderGame(){
@@ -75,42 +66,76 @@ function renderGame(){
             dCardsEle.textContent += dCards[j] + " ";
         };
 
-    dSumEle.textContent = "SUM: " + dSum;
-        
-        if (dSum <= 17){
-            dMessage = "Dealer hits."; 
-            dealerDrawCard()   
-        }else if (dSum === 21){
-            dMessage = "Dealer Has Blackjack"
-            dealerHasBlackJack = true;
-        }else if (dSum <= 20){
-            dMessage = "Dealer stays."
-            isAlive = false;
-        } else {
-            dMessage = "Dealer busts, you win"
-            isAlive = false;
-    };
+    dSumEle.textContent = "SUM: " + dSum; 
+};
+
+function dealerRender(){
+    if (dSum < 17){
+        dMessage = "Dealer hits."; 
+        dealerDrawCard()   
+    }else if (dSum === 21){
+        dMessage = "Dealer Has Blackjack"
+        dealerHasBlackJack = true;
+    }else if (dSum <= 20){
+        dMessage = "Dealer stays."
+        isAlive = false;
+    } else {
+        dMessage = "Dealer busts, you win"
+        isAlive = false;
+};
 
     dMessageEle.textContent = dMessage;
+
 };
-    
+
+function randomCard() {
+    let random = Math.floor(Math.random() * 13) +1
+        if (random > 10){
+            return 10
+        }else if (random === 1 ){
+            return 11
+        }else {
+            return random
+        };
+};
 
 function drawCard(){
     if (isAlive === true && hasBlackJack === false) {
         let card = randomCard()
         sum += card
         cards.push(card)
-        renderGame()
+        renderGame()  
+        dealerRender()      
     };
-   
-       
+    
+};
+
+function stay() {
+    message = "Player stays."
+    if (dealerAlive === true && dealerHasBlackJack === false){
+        dealerRender();
+        score();
+    }
 };
 
 function dealerDrawCard(){
-    if (isAlive === true && hasBlackJack === false) {
+    if (dealerAlive === true && dealerHasBlackJack === false) {
         let dCard = randomCard()
         dSum += dCard
         dCards.push(dCard)
         renderGame()
+        score()
     };
+};
+
+function score(){
+    if (sum === 21){
+        playerEle.textContent = player[1].chips += 50
+    }else if (sum > dSum){
+        playerEle.textContent = player[1].chips += 25
+    }else if (sum < dSum ) { 
+        playerEle.textContent = player[1].chips -= 25
+    }else if (sum = dSum){
+        messageEle.textContent = message; 
+    }
 };
