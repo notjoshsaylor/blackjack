@@ -1,5 +1,4 @@
 let player = {
-    name: "Josh",
     chips: 100
 };
 
@@ -13,17 +12,17 @@ let message = "";
 let dMessage = "";
 let hasBlackJack = false;
 let dealerHasBlackJack = false;
-let cardsEle = document.getElementById("cards-ele");
-let sumEle = document.getElementById("sum-ele");
-let messageEle = document.getElementById("message-ele");
-let playerEle = document.getElementById("player");
-let dCardsEle = document.getElementById("dcards-ele");
-let dSumEle = document.getElementById("dSum-ele");
-let dMessageEle = document.getElementById("dMessage-ele");
-let stayEle = document.getElementById("stay-ele");
-let startEle = document.getElementById("start-ele");
+const cardsEle = document.getElementById("cards-ele");
+const sumEle = document.getElementById("sum-ele");
+const messageEle = document.getElementById("message-ele");
+const playerEle = document.getElementById("player");
+const dCardsEle = document.getElementById("dcards-ele");
+const dSumEle = document.getElementById("dSum-ele");
+const dMessageEle = document.getElementById("dMessage-ele");
+const stayEle = document.getElementById("stay-ele");
+const startEle = document.getElementById("start-ele");
 
-playerEle.textContent = player.name + " - " + "$" + player.chips;
+playerEle.textContent = "$" + player.chips;
 
 function startGame(){
     isAlive = true;
@@ -39,6 +38,8 @@ function startGame(){
     dCards = [card3, card4];
     dSum = card3 + card4;
     renderGame()
+    startEle.textContent = "NEW GAME"
+   
 };
 
 function renderGame(){
@@ -112,6 +113,7 @@ function drawCard(){
 
 function stay() {
     message = "Player stays."
+    messageEle.textContent = message; 
     if (dealerAlive === true && dealerHasBlackJack === false){
         dealerRender();
         score();
@@ -124,18 +126,22 @@ function dealerDrawCard(){
         dSum += dCard
         dCards.push(dCard)
         renderGame()
-        score()
+       
     };
 };
 
 function score(){
     if (sum === 21){
-        playerEle.textContent = player[1].chips += 50
-    }else if (sum > dSum){
-        playerEle.textContent = player[1].chips += 25
+        playerEle.textContent = player.chips += 50
+    }else if (sum > dSum ){
+        playerEle.textContent = player.chips += 25
+        message = "PLAYER WINS"
     }else if (sum < dSum ) { 
-        playerEle.textContent = player[1].chips -= 25
+        playerEle.textContent = player.chips -= 25
+        message = "DEALER WINS"
     }else if (sum = dSum){
-        messageEle.textContent = message; 
+       message = "PUSH"
     }
+    messageEle.textContent = message; 
+    dMessageEle.textContent = message;
 };
